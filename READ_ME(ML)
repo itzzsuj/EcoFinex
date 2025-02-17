@@ -1,0 +1,21 @@
+Machine Learning in EcoFinex
+EcoFinex leverages AI-driven analytics to optimize green finance investments by evaluating and predicting the sustainability impact of various projects. The ML models are designed to assess ESG (Environmental, Social, and Governance) metrics, perform risk analysis, and optimize financial decisions.
+
+🛠️ ML Features
+ESG Project Scoring – Uses AI models to assign sustainability impact scores based on various ESG parameters.
+Risk Prediction – Predicts potential financial and environmental risks associated with green investments.
+Optimization Engine – Applies Linear Programming and Mixed-Integer Optimization to maximize ESG impact.
+Portfolio Diversification – Uses AI-based portfolio selection methods to balance risk and return.
+Trend Analysis – Identifies historical ESG trends and future growth predictions.
+
+ML Workflow
+Data Collection – Aggregates ESG data from government sources, NGOs, and financial institutions.
+Data Preprocessing – Cleans, normalizes, and encodes ESG data for model input.
+Feature Engineering – Extracts relevant sustainability and financial metrics.
+Model Training & Evaluation – Trains models using scikit-learn, TensorFlow, and XGBoost.
+Optimization – Implements financial optimization strategies for ESG maximization.
+Model Deployment – Hosted on Firebase ML for real-time inference.
+⚙️ Tech Stack
+Programming Language: Python
+Libraries Used: TensorFlow, scikit-learn, XGBoost, Pandas, NumPy, Matplotlib
+Deployment: Firebase ML Kit, FastAPI (for API integration)
