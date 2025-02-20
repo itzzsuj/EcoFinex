@@ -18,4 +18,4 @@ Model Deployment – Hosted on Firebase ML for real-time inference.
 ⚙️ Tech Stack
 Programming Language: Python
 Libraries Used: TensorFlow, scikit-learn, XGBoost, Pandas, NumPy, Matplotlib
-Deployment: Firebase ML Kit, FastAPI (for API integration)
+Deployment: Firebase ML Kit, FastAPI (for API integration)>
