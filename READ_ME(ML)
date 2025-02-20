@@ -8,7 +8,7 @@ Optimization Engine – Applies Linear Programming and Mixed-Integer Optimizatio
 Portfolio Diversification – Uses AI-based portfolio selection methods to balance risk and return.
 Trend Analysis – Identifies historical ESG trends and future growth predictions.
 
-ML Workflow
+ML Workflow>
 Data Collection – Aggregates ESG data from government sources, NGOs, and financial institutions.
 Data Preprocessing – Cleans, normalizes, and encodes ESG data for model input.
 Feature Engineering – Extracts relevant sustainability and financial metrics.
