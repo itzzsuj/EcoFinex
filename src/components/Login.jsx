@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, db } from "../firebase/firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,8 +19,9 @@ const Login = () => {
     return email.endsWith("@axis.com");
   };
 
-  const signInOrRegister = (e) => {
+  const signInOrRegister = async (e) => {
     e.preventDefault();
+
     if (!usertype || !email || !password) {
       alert("Please fill all required fields");
       return;
@@ -26,26 +33,58 @@ const Login = () => {
       return;
     }
 
-    // Simulate registration or login process
-    if (isRegister) {
-      alert("Registration successful");
-      navigate("/");
-    } else {
-      if (email === "test@axis.com" && password === "password123") {
-        alert("Login successful");
-        switch (usertype) {
-          case "NGO/Government":
-            navigate("/NGODashboard");
-            break;
-          case "Financial/Bank":
-            navigate("/FinancialDashboard");
-            break;
-          default:
-            navigate("/");
-        }
+    try {
+      if (isRegister) {
+        // Registration: Create user in Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // Store user type in Firestore
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          email,
+          usertype,
+        });
+
+        alert("Registration successful!");
+        navigate("/");
+
       } else {
-        alert("Invalid credentials");
+        // Login: Authenticate and validate user type
+        await signInWithEmailAndPassword(auth, email, password);
+
+        // Fetch user data from Firestore
+        const userDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+
+          if (userData.usertype !== usertype) {
+            alert(`Invalid user type. You are registered as ${userData.usertype}.`);
+            return;
+          }
+
+          alert("Login successful!");
+
+          // Redirect based on correct user type
+          switch (usertype) {
+            case "NGO/Government":
+              navigate("/NGODashboard");
+              break;
+            case "Financial/Bank":
+              navigate("/FinancialDashboard");
+              break;
+            default:
+              navigate("/");
+          }
+        } else {
+          alert("User not found. Please register first.");
+        }
       }
+    } catch (error) {
+      alert(error.message);
     }
   };
 
